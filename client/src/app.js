@@ -8,14 +8,12 @@ var cachedHtml = "";
 
 
 var getCachedHtml = function(callback){
-  console.log('requesting cache data');
 
   fs.readFile('cacheData.html', 'utf8', function(err, data){
     if(err){
       throw err;
     } else {
       // console.log("html in first call: ", data) this checks out!
-      console.log('data read: ' + data.slice(0,200) + '...');
     }
     callback(data);
 
@@ -23,18 +21,36 @@ var getCachedHtml = function(callback){
 }
 
 var createJsonFromHtml = function(data){
-  console.log('entering callback. i still have some data, look: ' + data.slice(0,100) + '...');
+
   $ = cheerio.load(data, {
     ignoreWhitespace: true,
-    xmlMode: true
+
   });
 
-  var tr = [];
-  $('tr').each(function(i, elem){
-    tr[i] = $(this).text();
-  })
+  var teamsArray = [];
 
-  tr.splice(0,2);
+  $('tr').each(function(i, tr){
+    var children = $(this).children();
+    var team = {
+      rank: children.eq(0).text(),
+      name: children.eq(1).text(),
+      p: children.eq(2).text(),
+      hw: children.eq(3).text(),
+      hd: children.eq(4).text(),
+      hl: children.eq(5).text(),
+      hf: children.eq(6).text(),
+      ha: children.eq(7).text(),
+      aw: children.eq(8).text(),
+      ad: children.eq(9).text(),
+      al: children.eq(10).text(),
+      af: children.eq(11).text(),
+      aa: children.eq(12).text(),
+    };
+    teamsArray.push(team);
+  }); 
+
+  console.log(teamsArray);
+
 }
 
 var app = function(){
