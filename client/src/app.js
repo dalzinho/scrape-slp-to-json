@@ -24,13 +24,15 @@ var getCachedHtml = function(callback){
 
 var createJsonFromHtml = function(data){
   console.log('entering callback. i still have some data, look: ' + data.slice(0,100) + '...');
-  $ = cheerio.load(data);
-  // var someRows = [];
+  $ = cheerio.load(data, {
+    ignoreWhitespace: true,
+    xmlMode: true
+  });
 
-  var rows = $('tr').each(function(index, element){
-    console.log(element);
+  var tr = [];
+  $('tr').each(function(i, elem){
+    tr[i] = $(this).text();
   })
-  console.log(rows);
 
 }
 
