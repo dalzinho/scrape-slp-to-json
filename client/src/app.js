@@ -25,10 +25,12 @@ var getCachedHtml = function(callback){
 var createJsonFromHtml = function(data){
   console.log('entering callback. i still have some data, look: ' + data.slice(0,100) + '...');
   $ = cheerio.load(data);
-  var table = $('table.league').html();
-  console.log('leagueTable data in callback: ' + table.slice(0,100) + '…');
-  var tr = $('table.league tr').html();
-  console.log(tr);
+  // var someRows = [];
+
+  var rows = $('tr').each(function(index, element){
+    console.log(element);
+  })
+  console.log(rows);
 
 }
 
