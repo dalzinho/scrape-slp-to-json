@@ -34,6 +34,7 @@ var createJsonFromHtml = function(data){
     tr[i] = $(this).text();
   })
 
+  tr.splice(0,2);
 }
 
 var app = function(){
