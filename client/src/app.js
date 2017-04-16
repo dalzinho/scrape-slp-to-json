@@ -7,22 +7,36 @@ var app = function(){
 
 request('http://www.nonleaguematters.co.uk/divisions/162/', function(err, res, html){
   // request sends off to get the raw html for the page
-    console.log('Error', err);
+    if(err){
+      console.log(err);
+      return;
+    }
 
   
 
   //cheerio takes the returned html and parses it into a DOM
   $ = cheerio.load(html, {
-    ignoreWhitespace: true,
+    // ignoreWhitespace: true,
   });
 
   var rowsAsStrings = [];
 
   $('table.league').children().each(function(index, element){
-    rowsAsStrings.push($(this).children().text());
+    var row = [];
+    
+    ($(this).children('td').each(function(index, element){
+      for(var i = 0; i < 20; i++){
+        iString = i.toString();
+        row.push(element.i);        
+      }
+    }));
+    rowsAsStrings.push(row);
   }).get();
 
   rowsAsStrings.splice(0, 2);
+
+  console.log(rowsAsStrings[3]);
+
 
   // at this stage, it returns 12 strings but with no spaces!!!! gaaaahhH!!!!
 
@@ -47,7 +61,6 @@ request('http://www.nonleaguematters.co.uk/divisions/162/', function(err, res, h
   //   teamJson.push(team);
   // });
 
-  console.log(rowsAsStrings);
 
   // need to regex(?!) team names
   // or manipulate dom a little more skillfully?
