@@ -1,41 +1,64 @@
 var request = require('request');
 var cheerio = require('cheerio');
+var fs = require('fs');
+var path = require('path');
 var Team = require('./models/Team');
 
+var cachedHtml = "";
+
+
+var getCachedHtml = function(callback){
+  console.log('requesting cache data');
+
+  fs.readFile('cacheData.html', 'utf8', function(err, data){
+    if(err){
+      throw err;
+    } else {
+      // console.log("html in first call: ", data) this checks out!
+      console.log('data read: ' + data.slice(0,200) + '...');
+    }
+    callback(data);
+
+  });
+}
+
+var createJsonFromHtml = function(data){
+  console.log('entering callback. i still have some data, look: ' + data.slice(0,100) + '...');
+  $ = cheerio.load(data);
+  var table = $('table.league').html();
+  console.log('leagueTable data in callback: ' + table.slice(0,100) + '…');
+  var tr = $('table.league tr').html();
+  console.log(tr);
+
+}
 
 var app = function(){
+  getCachedHtml(createJsonFromHtml);
+}
 
-request('http://www.nonleaguematters.co.uk/divisions/162/', function(err, res, html){
-  // request sends off to get the raw html for the page
-    if(err){
-      console.log(err);
-      return;
-    }
+app();
 
-  
 
-  //cheerio takes the returned html and parses it into a DOM
-  $ = cheerio.load(html, {
-    // ignoreWhitespace: true,
-  });
 
-  var rowsAsStrings = [];
+ //  //cheerio takes the returned html and parses it into a DOM
+ //  $ = cheerio.load(tableData);
 
-  $('table.league').children().each(function(index, element){
-    var row = [];
-    
-    ($(this).children('td').each(function(index, element){
-      for(var i = 0; i < 20; i++){
-        iString = i.toString();
-        row.push(element.i);        
-      }
-    }));
-    rowsAsStrings.push(row);
-  }).get();
+ //  var rowsAsStrings = [];
 
-  rowsAsStrings.splice(0, 2);
+ //  $('table.league').children().each(function(index, element){
+ //    var row = [];
 
-  console.log(rowsAsStrings[3]);
+ //    ($(this).children('td').each(function(index, element){
+ //      for(var i = 0; i < 20; i++){
+ //        row.push(element.i);        
+ //      }
+ //    }));
+ //    rowsAsStrings.push(row);
+ //  }).get();
+
+ //  rowsAsStrings.splice(0, 2);
+
+
 
 
   // at this stage, it returns 12 strings but with no spaces!!!! gaaaahhH!!!!
@@ -65,8 +88,6 @@ request('http://www.nonleaguematters.co.uk/divisions/162/', function(err, res, h
   // need to regex(?!) team names
   // or manipulate dom a little more skillfully?
 
-  });
-}
 
 
-app();
+
