@@ -27,6 +27,7 @@ var Team = function(options){
 
   this.setGoalDifference();
   this.setPoints();
+  this.setAverages();
 };
 
 Team.prototype = {
@@ -40,6 +41,12 @@ Team.prototype = {
   setPoints: function(){
     this.hpts = (3*this.hw) + this.hd;
     this.apts = (3*this.aw) + this.ad;
+  },
+
+  setAverages: function(){
+    this.ppg = (this.pts / this.p).toFixed(3);
+    this.gdpg =  (this.gd / this.p).toFixed(3);
+    this.poss = 66 - (3*this.ol) - this.od;
   }
 
 }

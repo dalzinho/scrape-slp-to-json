@@ -52,8 +52,16 @@ var createJsonFromHtml = function(data){
     var team = new Team(options);
     teamsArray.push(team);
   }); 
-  teamsArray.splice(0, 2);
-  console.log(teamsArray);
+
+  teamsArray = teamsArray.splice(2, 12);
+
+  fs.writeFile(path.join('leagueTable.json'), JSON.stringify(teamsArray), function(error){
+    if(error){
+      console.log("Error: " + error);
+    } else {
+      console.log('Successful write!');
+    };
+  });
 
 }
 
