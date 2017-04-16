@@ -49,6 +49,7 @@ Team.prototype = {
     this.poss = 66 - (3*this.ol) - this.od;
   }
 
+
 }
 
 module.exports = Team;
