@@ -76,9 +76,19 @@ describe('table', function(){
     assert.equal(table.sdPPG, 1.414);
   });
 
-  it('can get stdev of gdpg');
+  it('can get stdev of gdpg', function(){
+    table.addTeam(team1);
+    table.addTeam(team2);
+    table.setSdGDPG();
+    assert.equal(table.sdGDPG, 1.414);
+  });
 
-  it('can get stdev of possible');
+  it('can get stdev of possible', function(){
+    table.addTeam(team1);
+    table.addTeam(team2);
+    table.setSdPoss();
+    assert.equal(table.sdPoss, 4.243);
+  });
 
   it('can set the score variable of held teams');
 
