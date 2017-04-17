@@ -105,7 +105,8 @@ describe('table', function(){
     table.addTeam(team1);
     table.addTeam(team2);
     table.setScores();
-    assert.equal(table.teams[0].score, 500);
+    assert.equal(table.teams[0].score, 594);
+    assert.equal(table.teams[1].score, 311);
   });
 
 
