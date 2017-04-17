@@ -10,6 +10,7 @@ Table.prototype = {
     this.teams.push(team);
 
     this.setAverages();
+    this.setSDevs();
   },
 
   setAveragePPG: function(){
@@ -68,8 +69,26 @@ Table.prototype = {
       return team.poss;
     });
     this.sdPoss = math.std(poss).toFixed(3);
-  }
+  },
 
+  setSDevs: function(){
+    this.setSdPPG();
+    this.setSdGDPG();
+    this.setSdPoss();
+  },
+
+  setScores: function(){
+    this.teams.forEach(team){
+      var ppgScore = (team.ppg - this.avPPG) / this.sdPPG;
+      var gdpgScore = (team.gdpg - this.avPPG) / this.sdGDPG;
+      var possScore = (team.poss - this.avPoss) / this.sdPoss;
+
+      var standard = (ppgScore + gdpgScore + possScore) / 3;
+
+      var teamScore = 500 + (200 * standard);
+      team.setScore(teamScore);
+    };
+  }
 }
 
 

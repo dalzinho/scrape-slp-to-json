@@ -90,7 +90,23 @@ describe('table', function(){
     assert.equal(table.sdPoss, 4.243);
   });
 
-  it('can set the score variable of held teams');
+  it('automatically sets SDs when team is added', function(){
+    table.addTeam(team1);
+    assert.equal(table.sdPPG, 0);
+    assert.equal(table.sdGDPG, 0);
+    assert.equal(table.sdPoss, 0);
+    table.addTeam(team2);
+    assert.equal(table.sdPPG, 1.414);
+    assert.equal(table.sdGDPG, 1.414);
+    assert.equal(table.sdPoss, 4.243);
+  });
+
+  it('can set the score variable of held teams', function(){
+    table.addTeam(team1);
+    table.addTeam(team2);
+    table.setScores();
+    assert.equal(table.teams[0].score, 500);
+  });
 
 
 })
