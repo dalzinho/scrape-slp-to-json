@@ -54,6 +54,7 @@ var createJsonFromHtml = function(data){
   }); 
 
   teamsArray = teamsArray.splice(2, 12);
+  console.log(teamsArray);
 
   fs.writeFile(path.join('leagueTable.json'), JSON.stringify(teamsArray), function(error){
     if(error){
@@ -70,57 +71,3 @@ var app = function(){
 }
 
 app();
-
-
-
- //  //cheerio takes the returned html and parses it into a DOM
- //  $ = cheerio.load(tableData);
-
- //  var rowsAsStrings = [];
-
- //  $('table.league').children().each(function(index, element){
- //    var row = [];
-
- //    ($(this).children('td').each(function(index, element){
- //      for(var i = 0; i < 20; i++){
- //        row.push(element.i);        
- //      }
- //    }));
- //    rowsAsStrings.push(row);
- //  }).get();
-
- //  rowsAsStrings.splice(0, 2);
-
-
-
-
-  // at this stage, it returns 12 strings but with no spaces!!!! gaaaahhH!!!!
-
-
-
-
-
-
-  
-
-  // rowsAsArrays = [];
-  // rowsAsStrings.forEach(function(row){
-  //   newArray = row.split(' ');
-  //   newArray.splice(0,1);
-  //   rowsAsArrays.push(newArray);
-  // });
-
-  // var teamJson = [];
-
-  // rowsAsArrays.forEach(function(row){
-  //   var team = new Team(row);
-  //   teamJson.push(team);
-  // });
-
-
-  // need to regex(?!) team names
-  // or manipulate dom a little more skillfully?
-
-
-
-

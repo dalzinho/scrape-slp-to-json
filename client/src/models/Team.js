@@ -47,6 +47,10 @@ Team.prototype = {
     this.ppg = (this.pts / this.p).toFixed(3);
     this.gdpg =  (this.gd / this.p).toFixed(3);
     this.poss = 66 - (3*this.ol) - this.od;
+  },
+
+  setScore: function(score){
+    this.score = score;
   }
 
 
