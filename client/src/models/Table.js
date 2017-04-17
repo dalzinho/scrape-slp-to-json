@@ -1,3 +1,5 @@
+var math = require('mathjs');
+
 var Table = function(){
   this.teams = [];
 
@@ -44,7 +46,16 @@ Table.prototype = {
     this.setAveragePPG();
     this.setAverageGDPG();
     this.setAveragePoss();
+  },
+
+  setSdPPG: function(){
+    var ppg = this.teams.map(function(team){
+      return team.ppg;
+    })
+
+    this.sdPPG = math.std(ppg).toFixed(3);
   }
+
 }
 
 

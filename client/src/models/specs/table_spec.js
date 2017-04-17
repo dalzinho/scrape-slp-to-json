@@ -63,9 +63,18 @@ describe('table', function(){
     assert.equal(table.avPPG, 3);
     assert.equal(table.avGDPG, 2);
     assert.equal(table.avPoss, 66);
+    table.addTeam(team2);
+    assert.equal(table.avPPG, 2);
+    assert.equal(table.avGDPG, 1);
+    assert.equal(table.avPoss, 63);
   });
 
-  it('can get stdev of ppg');
+  it('can get stdev of ppg', function(){
+    table.addTeam(team1);
+    table.addTeam(team2);
+    table.setSdPPG();
+    assert.equal(table.sdPPG, 1.414);
+  });
 
   it('can get stdev of gdpg');
 
