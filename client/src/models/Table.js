@@ -85,7 +85,7 @@ Table.prototype = {
 
     this.teams.forEach(function(team){
       var rawPPG = (team.ppg - avPPG) / sdPPG;
-      var rawGDPG = (team.gdpg - avPPG) / sdGDPG;
+      var rawGDPG = (team.gdpg - avGDPG) / sdGDPG;
       var rawPoss = (team.poss - avPoss) / sdPoss;
 
       var ppgScore = parseFloat(rawPPG.toFixed(4));
