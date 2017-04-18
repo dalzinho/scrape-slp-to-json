@@ -52,7 +52,7 @@ Table.prototype = {
       return team.ppg;
     })
 
-    this.sdPPG = math.std(ppg).toFixed(3);
+    this.sdPPG = math.std(ppg, 'uncorrected').toFixed(3);
   },
 
   setSdGDPG: function(){
@@ -84,14 +84,18 @@ Table.prototype = {
     var sdPoss = this.sdPoss;
 
     this.teams.forEach(function(team){
-      var ppgScore = (team.ppg - avPPG) / sdPPG;
-      var gdpgScore = (team.gdpg - avPPG) / sdGDPG;
-      var possScore = (team.poss - avPoss) / sdPoss;
+      var rawPPG = (team.ppg - avPPG) / sdPPG;
+      var rawGDPG = (team.gdpg - avPPG) / sdGDPG;
+      var rawPoss = (team.poss - avPoss) / sdPoss;
 
-      var standard = (ppgScore + (0.2 * gdpgScore) + (0.2 * possScore)) / 3;
+      var ppgScore = parseFloat(rawPPG.toFixed(4));
+      var gdpgScore = parseFloat(rawGDPG.toFixed(4));
+      var possScore = parseFloat(rawPoss.toFixed(4));
 
-      var teamScore = Math.floor(500 + (200 * standard));
-      team.setScore(teamScore);
+      var rawStandard = (ppgScore + (0.2 * gdpgScore) + (0.2 * possScore)) / 3;      
+
+      var teamScore = Math.floor(500 + (200 * rawStandard));
+      team.setScore(teamScore, possScore, gdpgScore, ppgScore);
     });
   },
 

@@ -44,13 +44,17 @@ Team.prototype = {
   },
 
   setAverages: function(){
-    this.ppg = (this.pts / this.p).toFixed(3);
-    this.gdpg =  (this.gd / this.p).toFixed(3);
-    this.poss = 66 - (3*this.ol) - this.od;
+    this.ppg = parseFloat((this.pts / this.p).toFixed(2));
+    this.gdpg =  parseFloat((this.gd / this.p).toFixed(2));
+    this.poss = 66 - ((3*this.ol) - (2*this.od));
   },
 
-  setScore: function(score){
+  setScore: function(score, stPoss, stGDPG, stPPG){
+    this.stPoss = stPoss;
+    this.stGDPG = stGDPG;
+    this.stPPG = stPPG;
     this.score = score;
+    
   }
 
 

@@ -12,7 +12,8 @@
     "mocha": "^3.2.0"
   },
   "scripts": {
-    "test": "mocha client/src/models/specs"
+    "test": "mocha client/src/models/specs",
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC"
