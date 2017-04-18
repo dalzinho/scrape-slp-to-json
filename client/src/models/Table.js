@@ -59,14 +59,14 @@ Table.prototype = {
     var gdpg = this.teams.map(function(team){
       return team.gdpg;
     });
-    this.sdGDPG = math.std(gdpg).toFixed(3);
+    this.sdGDPG = math.std(gdpg, 'uncorrected').toFixed(3);
   },
 
   setSdPoss: function(){
     var poss = this.teams.map(function(team){
       return team.poss;
     });
-    this.sdPoss = math.std(poss).toFixed(3);
+    this.sdPoss = math.std(poss, 'uncorrected').toFixed(3);
   },
 
   setSDevs: function(){

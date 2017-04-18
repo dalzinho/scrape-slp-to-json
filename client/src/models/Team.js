@@ -46,7 +46,7 @@ Team.prototype = {
   setAverages: function(){
     this.ppg = parseFloat((this.pts / this.p).toFixed(2));
     this.gdpg =  parseFloat((this.gd / this.p).toFixed(2));
-    this.poss = 66 - ((3*this.ol) - (2*this.od));
+    this.poss = 66 - ( 3 * this.ol) - (2 * this.od);
   },
 
   setScore: function(score, stPoss, stGDPG, stPPG){
