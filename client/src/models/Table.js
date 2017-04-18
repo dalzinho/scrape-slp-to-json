@@ -8,9 +8,7 @@ Table.prototype = {
   addTeam: function(team){
     this.teams.push(team);
 
-    this.setAverages();
-    this.setSDevs();
-    this.setScores();
+
   },
 
   setAveragePPG: function(){
@@ -90,11 +88,17 @@ Table.prototype = {
       var gdpgScore = (team.gdpg - avPPG) / sdGDPG;
       var possScore = (team.poss - avPoss) / sdPoss;
 
-      var standard = (ppgScore + gdpgScore + possScore) / 3;
+      var standard = (ppgScore + (0.2 * gdpgScore) + (0.2 * possScore)) / 3;
 
       var teamScore = Math.floor(500 + (200 * standard));
       team.setScore(teamScore);
     });
+  },
+
+  setStats: function(){
+    this.setAverages();
+    this.setSDevs();
+    this.setScores();
   }
 }
 

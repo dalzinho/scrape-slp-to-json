@@ -10,7 +10,7 @@ var cachedHtml = "";
 
 var getCachedHtml = function(callback){
 
-  fs.readFile('./cacheData.html', 'utf8', function(err, data){
+  fs.readFile('./client/src/cacheData.html', 'utf8', function(err, data){
     if(err){
       throw err;
     }
@@ -55,9 +55,10 @@ var createJsonFromHtml = function(data){
   }); 
 
   table.teams = table.teams.splice(2, 12);
+  table.setStats(); 
   console.log(table.teams);
 
-  fs.writeFile(path.join('leagueTable.json'), JSON.stringify(teamsArray), function(error){
+  fs.writeFile(path.join('leagueTable.json'), JSON.stringify(table.teams), function(error){
     if(error){
       console.log("Error: " + error);
     } else {
